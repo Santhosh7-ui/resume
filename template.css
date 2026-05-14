@@ -215,13 +215,15 @@ a { color: inherit; text-decoration: none; }
 }
 
 .left-column {
-    padding: 32px;
+    padding: 32px 32px 32px 40px; /* extra left padding for drag handle */
     border-right: 1px solid var(--primary-100);
+    overflow: visible;
 }
 
 .right-column {
     padding: 32px;
     background: var(--primary-50);
+    overflow: visible;
 }
 
 /* ---- Section shared ---- */
@@ -230,6 +232,8 @@ a { color: inherit; text-decoration: none; }
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 0.5s ease, transform 0.5s ease;
+    position: relative;
+    overflow: visible; /* allow drag handle to show outside */
 }
 .section.animate-in { opacity: 1; transform: translateY(0); }
 .section:last-child { margin-bottom: 0; }

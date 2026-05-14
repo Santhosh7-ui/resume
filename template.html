@@ -656,19 +656,37 @@
         ];
 
         EDITABLE_SELECTORS.forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => {
+            document.querySelectorAll(sel).forEach((el, i) => {
                 el.setAttribute('contenteditable', 'true');
                 el.setAttribute('spellcheck', 'false');
+                // Give each field a stable unique ID for reliable save/load
+                if (!el.dataset.fieldId) {
+                    el.dataset.fieldId = sel.replace(/[^a-z0-9]/gi,'_') + '_' + i;
+                }
             });
         });
 
-        // ---- Autosave to localStorage ----
-        const SAVE_KEY = 'resume_template_v1';
+        // Also tag strength-card content editable fields
+        document.querySelectorAll('.strength-icon, .strength-content h4, .strength-content p').forEach((el, i) => {
+            el.setAttribute('contenteditable', 'true');
+            el.setAttribute('spellcheck', 'false');
+            if (!el.dataset.fieldId) el.dataset.fieldId = 'strength_' + i;
+        });
+
+        // Tag hobby tags
+        document.querySelectorAll('.hobby-tag').forEach((el, i) => {
+            el.setAttribute('contenteditable', 'true');
+            el.setAttribute('spellcheck', 'false');
+            if (!el.dataset.fieldId) el.dataset.fieldId = 'hobby_' + i;
+        });
+
+        // ---- Autosave to localStorage (keyed by stable field ID) ----
+        const SAVE_KEY = 'resume_template_v2'; // v2 = ID-based, clears old broken v1
 
         function saveToLocal() {
-            const data = {};
-            document.querySelectorAll('[contenteditable]').forEach((el, i) => {
-                data['el_' + i] = el.innerHTML;
+            const data = { _version: 2 };
+            document.querySelectorAll('[data-field-id]').forEach(el => {
+                data[el.dataset.fieldId] = el.innerHTML;
             });
             localStorage.setItem(SAVE_KEY, JSON.stringify(data));
             const st = document.getElementById('saveStatus');
@@ -680,8 +698,10 @@
             const raw = localStorage.getItem(SAVE_KEY);
             if (!raw) return;
             const data = JSON.parse(raw);
-            document.querySelectorAll('[contenteditable]').forEach((el, i) => {
-                if (data['el_' + i] !== undefined) el.innerHTML = data['el_' + i];
+            if (data._version !== 2) return; // reject old broken data
+            document.querySelectorAll('[data-field-id]').forEach(el => {
+                const saved = data[el.dataset.fieldId];
+                if (saved !== undefined) el.innerHTML = saved;
             });
         }
 
@@ -725,6 +745,8 @@
             '.language-item',
             '.personal-item',
             '.contact-item',
+            '.strength-card',
+            '.hobby-tag',
             '.section'
         ];
 
