@@ -73,7 +73,55 @@
             border-radius: 4px;
             cursor: text;
         }
-        @media print { #editor-toolbar { display:none!important; } }
+
+        /* ---- DELETE BUTTON ---- */
+        .deletable {
+            position: relative;
+        }
+        .deletable:hover > .del-btn,
+        .deletable:focus-within > .del-btn {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .del-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: #ef4444;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 800;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s, transform 0.2s;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            user-select: none;
+        }
+        .del-btn:hover { background: #dc2626; transform: scale(1.15); }
+        /* Sections get a wider delete label */
+        .section > .del-btn {
+            top: 4px;
+            right: 4px;
+            width: auto;
+            border-radius: 6px;
+            padding: 3px 10px;
+            font-size: 0.72rem;
+            letter-spacing: 0.3px;
+        }
+        @media print {
+            #editor-toolbar { display:none!important; }
+            .del-btn { display:none!important; }
+        }
     </style>
 </head>
 <body>
@@ -602,6 +650,47 @@
                     sel.removeAllRanges();
                     sel.addRange(range);
                 }
+            });
+        });
+
+        // ---- DELETE BUTTON logic ----
+        // Elements where the whole block is deleted
+        const BLOCK_DELETABLE = [
+            '.skill-tag',
+            '.exp-bullets li',
+            '.achievements-list li',
+            '.exp-block',
+            '.project-block',
+            '.edu-card',
+            '.cert-card',
+            '.language-item',
+            '.personal-item',
+            '.contact-item',
+            '.section'
+        ];
+
+        function addDeleteBtn(el, label) {
+            if (el.querySelector(':scope > .del-btn')) return; // already has one
+            el.classList.add('deletable');
+            const btn = document.createElement('span');
+            btn.className = 'del-btn';
+            btn.innerHTML = label || '&times;';
+            btn.title = 'Delete this item';
+            btn.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (confirm('Delete this item?')) {
+                    el.remove();
+                    saveToLocal();
+                }
+            });
+            el.appendChild(btn);
+        }
+
+        BLOCK_DELETABLE.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => {
+                const lbl = sel === '.section' ? '&times; Remove Section' : null;
+                addDeleteBtn(el, lbl);
             });
         });
 
