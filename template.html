@@ -913,13 +913,16 @@
             btn.className = 'del-btn';
             btn.innerHTML = label || '&times;';
             btn.title = 'Delete this item';
-            btn.addEventListener('mousedown', function(e) {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                if (confirm('Delete this item?')) {
-                    el.remove();
-                    saveToLocal();
-                }
+                // Tiny timeout prevents browser event loop from instantly dismissing the confirm dialog
+                setTimeout(() => {
+                    if (confirm('Delete this item?')) {
+                        el.remove();
+                        saveToLocal();
+                    }
+                }, 10);
             });
             el.appendChild(btn);
         }
