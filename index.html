@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Hub | Professional Resume Templates</title>
+    <meta name="description" content="Choose your professional resume template — tailored for specific companies or a general all-purpose resume.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0f172a;
+            --navy-light: #1e293b;
+            --gold: #f59e0b;
+            --gold-light: #fcd34d;
+            --slate: #64748b;
+            --slate-light: #94a3b8;
+            --white: #ffffff;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --green: #10b981;
+            --purple: #8b5cf6;
+            --blue: #3b82f6;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--navy);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ---- HERO NAV ---- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.3px;
+        }
+
+        .nav-logo span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 999px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+
+        /* ---- HERO ---- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1a2744 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%);
+            top: -100px; right: -100px;
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 70%);
+            bottom: -50px; left: -50px;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245,158,11,0.15);
+            border: 1px solid rgba(245,158,11,0.3);
+            color: var(--gold);
+            padding: 6px 18px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 span { color: var(--gold); }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.65);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.35);
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 1;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-6px); }
+        }
+
+        .scroll-hint svg { opacity: 0.5; }
+
+        /* ---- TEMPLATES SECTION ---- */
+        .templates-section {
+            padding: 100px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--slate);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto 60px;
+            line-height: 1.7;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .template-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(15,23,42,0.06);
+            position: relative;
+        }
+
+        .template-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(15,23,42,0.14);
+            border-color: transparent;
+        }
+
+        .template-card:hover .card-preview {
+            transform: scale(1.04);
+        }
+
+        .card-preview-wrap {
+            overflow: hidden;
+            height: 220px;
+            position: relative;
+        }
+
+        .card-preview {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .preview-navy {
+            background: linear-gradient(135deg, #0f172a, #1e293b, #1a2744);
+        }
+
+        .preview-teal {
+            background: linear-gradient(135deg, #0d4f4f, #0f766e, #134e4a);
+        }
+
+        .preview-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 999px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-specific {
+            background: rgba(245,158,11,0.2);
+            color: var(--gold);
+            border: 1px solid rgba(245,158,11,0.4);
+        }
+
+        .badge-general {
+            background: rgba(16,185,129,0.2);
+            color: var(--green);
+            border: 1px solid rgba(16,185,129,0.4);
+        }
+
+        /* Mini resume preview inside card */
+        .mini-resume {
+            width: 85%;
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            font-size: 0;
+        }
+
+        .mini-header {
+            height: 28px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .mini-header.navy { background: linear-gradient(90deg, #0f172a, #1e293b); }
+        .mini-header.teal { background: linear-gradient(90deg, #0d4f4f, #0f766e); }
+
+        .mini-row { height: 6px; border-radius: 3px; background: #e2e8f0; margin-bottom: 4px; }
+        .mini-row.w80 { width: 80%; }
+        .mini-row.w60 { width: 60%; }
+        .mini-row.w90 { width: 90%; }
+        .mini-row.w40 { width: 40%; }
+        .mini-row.gold { background: linear-gradient(90deg, #f59e0b, #fcd34d); width: 50%; }
+        .mini-row.green { background: linear-gradient(90deg, #10b981, #34d399); width: 50%; }
+        .mini-spacer { height: 8px; }
+        .mini-cols { display: flex; gap: 6px; }
+        .mini-col { flex: 1; }
+
+        .card-body {
+            padding: 28px;
+        }
+
+        .card-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 999px;
+            margin-bottom: 14px;
+        }
+
+        .tag-navy {
+            background: #f1f5f9;
+            color: var(--navy);
+        }
+
+        .tag-green {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--slate);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .card-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .card-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.83rem;
+            color: var(--navy-light);
+            font-weight: 500;
+        }
+
+        .feat-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-gold { background: var(--gold); }
+        .dot-green { background: var(--green); }
+
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s;
+            letter-spacing: 0.2px;
+        }
+
+        .btn-navy {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--white);
+        }
+
+        .btn-navy:hover {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(15,23,42,0.2);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #059669, #10b981);
+            color: var(--white);
+        }
+
+        .btn-green:hover {
+            background: linear-gradient(135deg, #047857, #059669);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(16,185,129,0.25);
+        }
+
+        /* ---- HOW IT WORKS ---- */
+        .how-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 100px 24px;
+        }
+
+        .how-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .how-section .section-title { color: var(--white); }
+        .how-section .section-label { color: var(--gold); }
+        .how-section .section-desc { color: rgba(255,255,255,0.55); }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 32px 20px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(245,158,11,0.3);
+            transform: translateY(-4px);
+        }
+
+        .step-num {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--gold), #d97706);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 0 auto 16px;
+        }
+
+        .step h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.6;
+        }
+
+        /* ---- FOOTER ---- */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        footer p {
+            font-size: 0.83rem;
+            color: var(--slate-light);
+        }
+
+        footer span { color: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">Resume<span>Hub</span></div>
+        <div class="nav-links">
+            <a href="#templates">Templates</a>
+            <a href="#how">How It Works</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">✦ Professional Resume Templates</div>
+        <h1>Land Your Dream Job<br>with a <span>Stunning Resume</span></h1>
+        <p>Choose from ATS-optimized templates crafted for maximum recruiter impact. Edit, print, and apply with confidence.</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number">2</span>
+                <span class="stat-label">Templates</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">ATS</span>
+                <span class="stat-label">Friendly</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Free</span>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            Scroll to explore
+        </div>
+    </section>
+
+    <!-- TEMPLATES -->
+    <section class="templates-section" id="templates">
+        <p class="section-label">✦ Choose Your Template</p>
+        <h2 class="section-title">Pick the Right Resume</h2>
+        <p class="section-desc">One tailored for a specific company, one universal for all applications.</p>
+
+        <div class="templates-grid">
+
+            <!-- CARD 1: Accenture Tailored -->
+            <div class="template-card">
+                <div class="card-preview-wrap">
+                    <div class="card-preview preview-navy">
+                        <span class="preview-badge badge-specific">Tailored</span>
+                        <div class="mini-resume">
+                            <div class="mini-header navy"></div>
+                            <div class="mini-row gold"></div>
+                            <div class="mini-spacer"></div>
+                            <div class="mini-cols">
+                                <div class="mini-col">
+                                    <div class="mini-row w90"></div>
+                                    <div class="mini-row w80"></div>
+                                    <div class="mini-row w60"></div>
+                                    <div class="mini-spacer"></div>
+                                    <div class="mini-row w90"></div>
+                                    <div class="mini-row w80"></div>
+                                </div>
+                                <div class="mini-col">
+                                    <div class="mini-row w80"></div>
+                                    <div class="mini-row w60"></div>
+                                    <div class="mini-row w40"></div>
+                                    <div class="mini-spacer"></div>
+                                    <div class="mini-row w80"></div>
+                                    <div class="mini-row w60"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag tag-navy">★ Company Specific</div>
+                    <h3 class="card-title">Accenture R2R Resume</h3>
+                    <p class="card-desc">Precision-crafted for the Record to Report Ops Associate role at Accenture. Highlights R2R, GL, and Finance Operations keywords.</p>
+                    <ul class="card-features">
+                        <li><span class="feat-dot dot-gold"></span>Tailored for Accenture job description</li>
+                        <li><span class="feat-dot dot-gold"></span>R2R, GL & Finance keywords optimized</li>
+                        <li><span class="feat-dot dot-gold"></span>Immediate joiner banner included</li>
+                        <li><span class="feat-dot dot-gold"></span>Availability pulse indicator</li>
+                    </ul>
+                    <a href="accenture-resume.html" class="card-btn btn-navy" id="viewAccentureBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        View Accenture Resume
+                    </a>
+                </div>
+            </div>
+
+            <!-- CARD 2: General Template -->
+            <div class="template-card">
+                <div class="card-preview-wrap">
+                    <div class="card-preview preview-teal">
+                        <span class="preview-badge badge-general">Universal</span>
+                        <div class="mini-resume">
+                            <div class="mini-header teal"></div>
+                            <div class="mini-row green"></div>
+                            <div class="mini-spacer"></div>
+                            <div class="mini-cols">
+                                <div class="mini-col">
+                                    <div class="mini-row w90"></div>
+                                    <div class="mini-row w80"></div>
+                                    <div class="mini-row w60"></div>
+                                    <div class="mini-spacer"></div>
+                                    <div class="mini-row w90"></div>
+                                    <div class="mini-row w80"></div>
+                                    <div class="mini-row w60"></div>
+                                </div>
+                                <div class="mini-col">
+                                    <div class="mini-row w80"></div>
+                                    <div class="mini-row w60"></div>
+                                    <div class="mini-row w40"></div>
+                                    <div class="mini-spacer"></div>
+                                    <div class="mini-row w80"></div>
+                                    <div class="mini-row w60"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-tag tag-green">✦ Universal Template</div>
+                    <h3 class="card-title">General Resume Template</h3>
+                    <p class="card-desc">A clean, ATS-friendly template for applying to any company or role. All sections are clearly marked — just fill in your details.</p>
+                    <ul class="card-features">
+                        <li><span class="feat-dot dot-green"></span>Works for any company or industry</li>
+                        <li><span class="feat-dot dot-green"></span>All sections with editable placeholders</li>
+                        <li><span class="feat-dot dot-green"></span>ATS-optimized structure</li>
+                        <li><span class="feat-dot dot-green"></span>Print-ready one-page format</li>
+                    </ul>
+                    <a href="template.html" class="card-btn btn-green" id="viewTemplateBtn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        Open & Edit Template
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="how">
+        <div class="how-inner">
+            <p class="section-label">✦ Simple Process</p>
+            <h2 class="section-title">How to Use</h2>
+            <p class="section-desc">Get your resume ready in minutes with these simple steps.</p>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h3>Choose Template</h3>
+                    <p>Pick the general template or the company-specific one above.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h3>Edit in Browser</h3>
+                    <p>Open the HTML file and replace placeholder text with your details.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h3>Preview &amp; Print</h3>
+                    <p>Hit the Print / Download button and save as PDF.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h3>Apply &amp; Win</h3>
+                    <p>Submit your polished, ATS-ready resume with confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with <span>♥</span> · ResumeHub · Professional Resume Templates</p>
+    </footer>
+
+</body>
+</html>

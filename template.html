@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Your Full Name] | [Target Role] Resume</title>
+    <meta name="description" content="Professional resume of [Your Full Name] — [Target Role]">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="template.css">
+    <style>
+        /* ---- EDITOR TOOLBAR ---- */
+        #editor-toolbar {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 999px;
+            padding: 8px 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            font-family: 'Inter', sans-serif;
+        }
+        #editor-toolbar .tb-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #f59e0b;
+            letter-spacing: 0.5px;
+            padding-right: 8px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            margin-right: 4px;
+        }
+        #editor-toolbar button {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            border-radius: 8px;
+            padding: 5px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        #editor-toolbar button:hover { background: rgba(255,255,255,0.15); }
+        #editor-toolbar .tb-save {
+            background: linear-gradient(135deg,#059669,#10b981);
+            border-color: transparent;
+        }
+        #editor-toolbar .tb-save:hover { background: linear-gradient(135deg,#047857,#059669); }
+        #editor-toolbar .tb-print {
+            background: linear-gradient(135deg,#0f766e,#14b8a6);
+            border-color: transparent;
+        }
+        #editor-toolbar .tb-reset { color: #f87171; }
+        #editor-toolbar .tb-status {
+            font-size: 0.7rem;
+            color: #10b981;
+            margin-left: 4px;
+            min-width: 60px;
+        }
+        [contenteditable]:focus {
+            outline: 2px dashed rgba(20,184,166,0.6);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        [contenteditable]:hover:not(:focus) {
+            background: rgba(20,184,166,0.07);
+            border-radius: 4px;
+            cursor: text;
+        }
+        @media print { #editor-toolbar { display:none!important; } }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         HOW TO EDIT THIS TEMPLATE:
+         1. Replace all text inside [ ] brackets
+         2. Delete any sections you don't need
+         3. Duplicate sections (e.g. more jobs) by copying the block
+         4. Click "Download / Print Resume" when done
+         ========================================== -->
+
+    <div class="resume-container">
+
+        <!-- Decorative corners -->
+        <div class="corner-accent top-left"></div>
+        <div class="corner-accent top-right"></div>
+        <div class="corner-accent bottom-left"></div>
+        <div class="corner-accent bottom-right"></div>
+
+        <!-- ===== HEADER ===== -->
+        <header class="resume-header">
+            <div class="header-content">
+                <div class="name-block">
+                    <!-- EDIT: Replace with your full name -->
+                    <h1 class="name">[Your Full Name]</h1>
+                    <div class="title-badge">
+                        <span class="badge-icon">★</span>
+                        <!-- EDIT: Your target job title -->
+                        <span>[Target Job Title] · [Industry]</span>
+                    </div>
+                    <!-- EDIT: Short descriptor line -->
+                    <p class="tagline">[Degree] Graduate · [Experience Level: Fresher / X Years Exp] · Open to Opportunities</p>
+                </div>
+
+                <div class="contact-grid">
+                    <!-- EDIT: Your phone number -->
+                    <a href="tel:+91XXXXXXXXXX" class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.22 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.14 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <span>+91 XXXXX XXXXX</span>
+                    </a>
+
+                    <!-- EDIT: Your email -->
+                    <a href="mailto:youremail@example.com" class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <span>youremail@example.com</span>
+                    </a>
+
+                    <!-- EDIT: Your LinkedIn URL — or delete this block -->
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </div>
+                        <span>LinkedIn Profile</span>
+                    </a>
+
+                    <!-- EDIT: Your city/location -->
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <span>[City, State] · Open to Relocate: [Yes/No]</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- OPTIONAL: Delete this banner if you are not an immediate joiner -->
+        <div class="availability-banner">
+            <div class="pulse-dot"></div>
+            <!-- EDIT: Notice period -->
+            <span>Available for Immediate Joining · [X] Days Notice Period</span>
+        </div>
+
+        <!-- ===== MAIN BODY ===== -->
+        <main class="resume-body">
+
+            <!-- ===== LEFT COLUMN ===== -->
+            <div class="left-column">
+
+                <!-- PROFESSIONAL SUMMARY -->
+                <section class="section" id="summary">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        </div>
+                        <h2>Professional Summary</h2>
+                    </div>
+                    <!-- EDIT: Write a 3–5 line summary. Use strong keywords for your target role. -->
+                    <p class="objective-text">
+                        Results-driven <strong>[Degree]</strong> graduate with a strong foundation in <strong>[Core Skill 1]</strong>, <strong>[Core Skill 2]</strong>, and <strong>[Core Skill 3]</strong>. Proven ability to <strong>[Key Achievement / Strength]</strong> in fast-paced environments. Seeking a <strong>[Target Role]</strong> position at <strong>[Target Company / Any Company]</strong> where I can contribute my skills in <strong>[Domain]</strong> and grow professionally. <strong>[Immediate joiner / X weeks notice period]</strong>.
+                    </p>
+                </section>
+
+                <!-- WORK EXPERIENCE — Delete this section if fresher with no experience -->
+                <section class="section" id="experience">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        </div>
+                        <h2>Work Experience</h2>
+                    </div>
+
+                    <!-- JOB 1 — Duplicate this block for more jobs -->
+                    <div class="exp-block">
+                        <div class="exp-header">
+                            <div class="exp-title-block">
+                                <!-- EDIT -->
+                                <h4 class="exp-role">[Job Title / Role]</h4>
+                                <p class="exp-company">[Company Name] · [City, State]</p>
+                            </div>
+                            <!-- EDIT: Dates -->
+                            <span class="exp-date">[Mon YYYY] – [Mon YYYY / Present]</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <!-- EDIT: Use action verbs. Add numbers/metrics wherever possible. -->
+                            <li>Managed / Developed / Led <strong>[what]</strong>, resulting in <strong>[measurable outcome]</strong></li>
+                            <li>Collaborated with <strong>[team/department]</strong> to <strong>[task/outcome]</strong></li>
+                            <li>Reduced / Improved / Increased <strong>[metric]</strong> by <strong>[X%]</strong> through <strong>[method]</strong></li>
+                            <li>[Additional responsibility or achievement]</li>
+                        </ul>
+                    </div>
+
+                    <!-- JOB 2 — Delete if not needed -->
+                    <div class="exp-block">
+                        <div class="exp-header">
+                            <div class="exp-title-block">
+                                <h4 class="exp-role">[Job Title / Role]</h4>
+                                <p class="exp-company">[Company Name] · [City, State]</p>
+                            </div>
+                            <span class="exp-date">[Mon YYYY] – [Mon YYYY]</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>[Responsibility or achievement]</li>
+                            <li>[Responsibility or achievement]</li>
+                            <li>[Responsibility or achievement]</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- INTERNSHIPS / TRAINING -->
+                <section class="section" id="internship">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h2>Internships &amp; Training</h2>
+                    </div>
+
+                    <div class="exp-block">
+                        <div class="exp-header">
+                            <div class="exp-title-block">
+                                <!-- EDIT -->
+                                <h4 class="exp-role">[Internship Role / Training Name]</h4>
+                                <p class="exp-company">[Organization Name]</p>
+                            </div>
+                            <span class="exp-date">[Duration, e.g. 3 Months · 2024]</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Assisted with <strong>[task / project]</strong> and gained hands-on experience in <strong>[skill]</strong></li>
+                            <li>Skills gained: [Skill 1], [Skill 2], [Skill 3]</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- PROJECTS — Great for freshers -->
+                <section class="section" id="projects">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <h2>Projects</h2>
+                    </div>
+
+                    <!-- PROJECT 1 — Duplicate for more -->
+                    <div class="project-block">
+                        <!-- EDIT -->
+                        <h4 class="project-title">[Project Name]</h4>
+                        <p class="project-tech">Tools / Tech: [Technology Stack or Tools Used]</p>
+                        <p class="project-desc">[Brief 2-line description of what the project does and your role / contribution. Mention outcome or impact.]</p>
+                    </div>
+
+                    <!-- PROJECT 2 -->
+                    <div class="project-block">
+                        <h4 class="project-title">[Project Name]</h4>
+                        <p class="project-tech">Tools / Tech: [Technology Stack or Tools Used]</p>
+                        <p class="project-desc">[Brief description of the project and outcome.]</p>
+                    </div>
+                </section>
+
+                <!-- EDUCATION -->
+                <section class="section" id="education">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 12 3 12 0v-5"/></svg>
+                        </div>
+                        <h2>Education</h2>
+                    </div>
+
+                    <div class="education-list">
+                        <!-- DEGREE — Most recent first -->
+                        <div class="edu-card featured">
+                            <!-- EDIT -->
+                            <div class="edu-year">[YYYY]</div>
+                            <div class="edu-details">
+                                <h4>[Degree Name, e.g. B.Com / B.Tech / BBA / MBA]</h4>
+                                <p class="edu-institution">[College/University Name]</p>
+                                <div class="edu-score">
+                                    <span class="score-badge">[CGPA: X.XX / XX%]</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PUC / 12th -->
+                        <div class="edu-card">
+                            <div class="edu-year">[YYYY]</div>
+                            <div class="edu-details">
+                                <h4>[PUC / 12th / Diploma — Stream]</h4>
+                                <p class="edu-institution">[Institution Name · Board Name]</p>
+                                <div class="edu-score">
+                                    <span class="score-badge">[XX%]</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 10th / SSLC -->
+                        <div class="edu-card">
+                            <div class="edu-year">[YYYY]</div>
+                            <div class="edu-details">
+                                <h4>SSLC / 10th Standard</h4>
+                                <p class="edu-institution">[School Name · Board Name]</p>
+                                <div class="edu-score">
+                                    <span class="score-badge">[XX%]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /left-column -->
+
+            <!-- ===== RIGHT COLUMN ===== -->
+            <div class="right-column">
+
+                <!-- SKILLS -->
+                <section class="section" id="skills">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                        <h2>Skills</h2>
+                    </div>
+
+                    <!-- Technical Skills -->
+                    <div class="skills-category">
+                        <h5 class="skills-label">Technical Skills</h5>
+                        <div class="skill-tags">
+                            <!-- EDIT: Replace with your actual technical skills -->
+                            <span class="skill-tag tech">[Skill 1]</span>
+                            <span class="skill-tag tech">[Skill 2]</span>
+                            <span class="skill-tag tech">[Skill 3]</span>
+                            <span class="skill-tag tech">[Skill 4]</span>
+                            <span class="skill-tag tech">[Skill 5]</span>
+                            <span class="skill-tag tech">[Skill 6]</span>
+                        </div>
+                    </div>
+
+                    <!-- Domain / Role-specific Skills -->
+                    <div class="skills-category">
+                        <h5 class="skills-label">Domain Skills</h5>
+                        <div class="skill-tags">
+                            <!-- EDIT: Role-specific skills e.g. Accounting, GST, R2R, SQL, Tally etc. -->
+                            <span class="skill-tag matched">[Domain Skill 1]</span>
+                            <span class="skill-tag matched">[Domain Skill 2]</span>
+                            <span class="skill-tag matched">[Domain Skill 3]</span>
+                            <span class="skill-tag matched">[Domain Skill 4]</span>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="skills-category">
+                        <h5 class="skills-label">Soft Skills</h5>
+                        <div class="skill-tags">
+                            <!-- EDIT -->
+                            <span class="skill-tag soft">Communication</span>
+                            <span class="skill-tag soft">Teamwork</span>
+                            <span class="skill-tag soft">Problem Solving</span>
+                            <span class="skill-tag soft">Time Management</span>
+                            <span class="skill-tag soft">Quick Learner</span>
+                            <span class="skill-tag soft">Adaptability</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CERTIFICATIONS -->
+                <section class="section" id="certifications">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                        </div>
+                        <h2>Certifications</h2>
+                    </div>
+
+                    <!-- Cert 1 — Duplicate for more -->
+                    <div class="cert-card">
+                        <div class="cert-icon">🎓</div>
+                        <div class="cert-details">
+                            <!-- EDIT -->
+                            <h4>[Certification Name]</h4>
+                            <p class="cert-id">[Issuing Organization] · [Year]</p>
+                            <p class="cert-desc">[Optional: 1 line about what you learned or the relevance to your target role.]</p>
+                        </div>
+                    </div>
+
+                    <!-- Cert 2 — Delete if not needed -->
+                    <div class="cert-card" style="margin-top:12px">
+                        <div class="cert-icon">📜</div>
+                        <div class="cert-details">
+                            <h4>[Certification Name]</h4>
+                            <p class="cert-id">[Issuing Organization] · [Year]</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ACHIEVEMENTS -->
+                <section class="section" id="achievements">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <h2>Achievements</h2>
+                    </div>
+                    <ul class="achievements-list">
+                        <!-- EDIT: List awards, ranks, leadership roles, academic honors -->
+                        <li>[Achievement 1 — e.g. Ranked top 5% in university exams, 2023]</li>
+                        <li>[Achievement 2 — e.g. Led a team of X students in college fest]</li>
+                        <li>[Achievement 3 — e.g. Won [Award Name] at [Event/Institution]]</li>
+                    </ul>
+                </section>
+
+                <!-- LANGUAGES -->
+                <section class="section" id="languages">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </div>
+                        <h2>Languages</h2>
+                    </div>
+                    <div class="languages-list">
+                        <!-- EDIT: Add your languages and set the width % for proficiency bar -->
+                        <div class="language-item">
+                            <span class="lang-name">English</span>
+                            <div class="lang-bar"><div class="lang-fill" style="width:80%"></div></div>
+                            <span class="lang-level">Professional</span>
+                        </div>
+                        <!-- EDIT: Add/remove language items -->
+                        <div class="language-item">
+                            <span class="lang-name">[Language]</span>
+                            <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+                            <span class="lang-level">Native</span>
+                        </div>
+                        <div class="language-item">
+                            <span class="lang-name">[Language]</span>
+                            <div class="lang-bar"><div class="lang-fill" style="width:50%"></div></div>
+                            <span class="lang-level">Conversational</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PERSONAL DETAILS -->
+                <section class="section" id="personal">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
+                        <h2>Additional Info</h2>
+                    </div>
+                    <div class="personal-grid">
+                        <!-- EDIT: Fill in your details -->
+                        <div class="personal-item">
+                            <span class="personal-label">Nationality</span>
+                            <span class="personal-value">Indian</span>
+                        </div>
+                        <div class="personal-item">
+                            <span class="personal-label">Typing Speed</span>
+                            <span class="personal-value">[XX WPM]</span>
+                        </div>
+                        <div class="personal-item">
+                            <span class="personal-label">Expected CTC</span>
+                            <span class="personal-value">[As per company norms / X LPA]</span>
+                        </div>
+                        <div class="personal-item">
+                            <span class="personal-label">Notice Period</span>
+                            <span class="personal-value">[Immediate / X Days / X Months]</span>
+                        </div>
+                        <div class="personal-item">
+                            <span class="personal-label">Relocation</span>
+                            <span class="personal-value">Willing to Relocate</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /right-column -->
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="resume-footer">
+            <div class="declaration">
+                <!-- EDIT: Update your name and location -->
+                <p>I hereby declare that all information provided above is true and accurate to the best of my knowledge.</p>
+                <div class="signature-block">
+                    <div class="sig-line">
+                        <span class="sig-label">Place:</span>
+                        <span class="sig-value">[City, State]</span>
+                    </div>
+                    <div class="sig-line">
+                        <span class="sig-label">Date:</span>
+                        <span class="sig-value" id="currentDate"></span>
+                    </div>
+                    <!-- EDIT: Your name -->
+                    <div class="sig-name">[Your Full Name]</div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Floating Editor Toolbar -->
+    <div id="editor-toolbar">
+        <span class="tb-label">✏️ EDIT MODE</span>
+        <button onclick="document.execCommand('bold')" title="Bold"><b>B</b></button>
+        <button onclick="document.execCommand('italic')" title="Italic"><i>I</i></button>
+        <button onclick="document.execCommand('underline')" title="Underline"><u>U</u></button>
+        <button class="tb-save" onclick="saveToLocal()">💾 Save</button>
+        <button class="tb-print" onclick="window.print()">🖨️ Print</button>
+        <button class="tb-reset" onclick="clearSaved()" title="Reset all to default">↺ Reset</button>
+        <span class="tb-status" id="saveStatus"></span>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="print-controls">
+        <a href="index.html" class="back-btn" id="backHomeBtn">← Back to Home</a>
+        <button onclick="window.print()" class="print-btn" id="printBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Download / Print Resume
+        </button>
+    </div>
+
+    <script>
+        // ---- Date ----
+        const today = new Date();
+        document.getElementById('currentDate').textContent = today.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+        // ---- Make editable: all text-carrying elements inside resume ----
+        const EDITABLE_SELECTORS = [
+            '.name', '.title-badge span:last-child', '.tagline',
+            '.contact-item span', '.availability-banner span',
+            '.objective-text',
+            '.exp-role', '.exp-company', '.exp-date', '.exp-bullets li',
+            '.project-title', '.project-tech', '.project-desc',
+            '.edu-year', '.edu-details h4', '.edu-institution', '.score-badge',
+            '.skills-label', '.skill-tag',
+            '.cert-details h4', '.cert-id', '.cert-desc',
+            '.achievements-list li',
+            '.lang-name', '.lang-level',
+            '.personal-label', '.personal-value',
+            '.sig-value', '.sig-name'
+        ];
+
+        EDITABLE_SELECTORS.forEach(sel => {
+            document.querySelectorAll(sel).forEach(el => {
+                el.setAttribute('contenteditable', 'true');
+                el.setAttribute('spellcheck', 'false');
+            });
+        });
+
+        // ---- Autosave to localStorage ----
+        const SAVE_KEY = 'resume_template_v1';
+
+        function saveToLocal() {
+            const data = {};
+            document.querySelectorAll('[contenteditable]').forEach((el, i) => {
+                data['el_' + i] = el.innerHTML;
+            });
+            localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+            const st = document.getElementById('saveStatus');
+            st.textContent = '✓ Saved!';
+            setTimeout(() => st.textContent = '', 2000);
+        }
+
+        function loadFromLocal() {
+            const raw = localStorage.getItem(SAVE_KEY);
+            if (!raw) return;
+            const data = JSON.parse(raw);
+            document.querySelectorAll('[contenteditable]').forEach((el, i) => {
+                if (data['el_' + i] !== undefined) el.innerHTML = data['el_' + i];
+            });
+        }
+
+        function clearSaved() {
+            if (confirm('Reset all changes to default placeholders?')) {
+                localStorage.removeItem(SAVE_KEY);
+                location.reload();
+            }
+        }
+
+        // Auto-save every 30 seconds
+        setInterval(saveToLocal, 30000);
+
+        // Load saved content on page load
+        loadFromLocal();
+
+        // ---- Auto-select placeholder text on first click ----
+        document.querySelectorAll('[contenteditable]').forEach(el => {
+            el.addEventListener('focus', function() {
+                const text = this.textContent.trim();
+                if (text.startsWith('[') && text.endsWith(']')) {
+                    const range = document.createRange();
+                    range.selectNodeContents(this);
+                    const sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                }
+            });
+        });
+
+        // ---- Scroll animations ----
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('animate-in');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.section, .edu-card, .cert-card, .project-block, .exp-block').forEach(el => observer.observe(el));
+
+        const langObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fill = entry.target.querySelector('.lang-fill');
+                    if (fill) fill.style.transform = 'scaleX(1)';
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.language-item').forEach(el => langObserver.observe(el));
+    </script>
+</body>
+</html>
