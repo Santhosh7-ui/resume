@@ -913,16 +913,35 @@
             btn.className = 'del-btn';
             btn.innerHTML = label || '&times;';
             btn.title = 'Delete this item';
+            btn.addEventListener('mousedown', function(e) { e.stopPropagation(); }); // prevent drag issues
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                // Tiny timeout prevents browser event loop from instantly dismissing the confirm dialog
-                setTimeout(() => {
-                    if (confirm('Delete this item?')) {
-                        el.remove();
-                        saveToLocal();
-                    }
-                }, 10);
+                if (btn.dataset.confirming === 'true') {
+                    el.remove();
+                    saveToLocal();
+                } else {
+                    const originalHtml = btn.innerHTML;
+                    btn.dataset.confirming = 'true';
+                    btn.innerHTML = 'Sure?';
+                    btn.style.background = '#dc2626';
+                    btn.style.color = '#fff';
+                    btn.style.padding = '2px 8px';
+                    btn.style.fontSize = '0.75rem';
+                    btn.style.borderRadius = '4px';
+                    
+                    setTimeout(() => {
+                        if (document.body.contains(btn)) {
+                            btn.dataset.confirming = 'false';
+                            btn.innerHTML = originalHtml;
+                            btn.style.background = '';
+                            btn.style.color = '';
+                            btn.style.padding = '';
+                            btn.style.fontSize = '';
+                            btn.style.borderRadius = '';
+                        }
+                    }, 3000);
+                }
             });
             el.appendChild(btn);
         }
