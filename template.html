@@ -121,6 +121,144 @@
         @media print {
             #editor-toolbar { display:none!important; }
             .del-btn { display:none!important; }
+            #uploadPanel { display:none!important; }
+        }
+
+        /* ---- UPLOAD BUTTON ---- */
+        #editor-toolbar .tb-upload {
+            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+            border-color: transparent;
+            color: #fff;
+        }
+        #editor-toolbar .tb-upload:hover { background: linear-gradient(135deg,#6d28d9,#7c3aed); }
+
+        /* ---- UPLOAD REVIEW PANEL ---- */
+        #uploadPanel {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.55);
+            z-index: 99998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(4px);
+        }
+        #uploadPanelInner {
+            background: #fff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 560px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 24px 64px rgba(15,23,42,0.25);
+            font-family: 'Inter', sans-serif;
+        }
+        #uploadPanelHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #0f172a;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 1;
+        }
+        #uploadPanelHeader button {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #94a3b8;
+            line-height: 1;
+            padding: 0 4px;
+        }
+        #uploadPanelHint {
+            padding: 10px 24px;
+            font-size: 0.82rem;
+            color: #64748b;
+            line-height: 1.6;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        #uploadFields {
+            padding: 16px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .upload-field-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+        .upload-field-row .uf-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 80px;
+            padding-top: 4px;
+        }
+        .upload-field-row .uf-value {
+            flex: 1;
+            font-size: 0.85rem;
+            color: #1e293b;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+        .upload-field-row .uf-apply {
+            background: linear-gradient(135deg,#059669,#10b981);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter',sans-serif;
+            flex-shrink: 0;
+        }
+        .upload-field-row .uf-apply:hover { background: linear-gradient(135deg,#047857,#059669); }
+        .upload-field-row.applied { border-color: #10b981; background: #f0fdf4; }
+        #uploadPanelFooter {
+            padding: 16px 24px 20px;
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 0 0 16px 16px;
+        }
+        #applyAllBtn {
+            background: linear-gradient(135deg,#0f766e,#14b8a6);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Inter',sans-serif;
+        }
+        #applyAllBtn:hover { background: linear-gradient(135deg,#0d9488,#0f766e); }
+        #uploadPanelFooter button:last-child {
+            background: #e2e8f0;
+            color: #475569;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Inter',sans-serif;
         }
     </style>
 </head>
@@ -619,10 +757,28 @@
         <button onclick="document.execCommand('bold')" title="Bold"><b>B</b></button>
         <button onclick="document.execCommand('italic')" title="Italic"><i>I</i></button>
         <button onclick="document.execCommand('underline')" title="Underline"><u>U</u></button>
+        <button class="tb-upload" onclick="document.getElementById('resumeUploadInput').click()" title="Upload PDF/DOCX to auto-fill">📄 Upload &amp; Fill</button>
+        <input type="file" id="resumeUploadInput" accept=".pdf,.docx,.txt" style="display:none" onchange="handleResumeUpload(this)">
         <button class="tb-save" onclick="saveToLocal()">💾 Save</button>
         <button class="tb-print" onclick="window.print()">🖨️ Print</button>
         <button class="tb-reset" onclick="clearSaved()" title="Reset all to default">↺ Reset</button>
         <span class="tb-status" id="saveStatus"></span>
+    </div>
+
+    <!-- Upload Review Panel -->
+    <div id="uploadPanel" style="display:none">
+        <div id="uploadPanelInner">
+            <div id="uploadPanelHeader">
+                <span>📋 Extracted from your resume</span>
+                <button onclick="closeUploadPanel()">&times;</button>
+            </div>
+            <p id="uploadPanelHint">Review the extracted data below. Click <b>Apply All</b> to fill the template, or apply fields individually.</p>
+            <div id="uploadFields"></div>
+            <div id="uploadPanelFooter">
+                <button id="applyAllBtn" onclick="applyAllFields()">✅ Apply All Fields</button>
+                <button onclick="closeUploadPanel()">✖ Cancel</button>
+            </div>
+        </div>
     </div>
 
     <!-- Bottom Controls -->
@@ -822,6 +978,294 @@
             });
         }, { threshold: 0.5 });
         document.querySelectorAll('.language-item').forEach(el => langObserver.observe(el));
+
+        // ============================================================
+        // RESUME UPLOAD & AUTO-FILL ENGINE
+        // ============================================================
+        let _parsedFields = {};
+
+        function loadScript(src) {
+            return new Promise((res, rej) => {
+                if (document.querySelector(`script[src="${src}"]`)) return res();
+                const s = document.createElement('script');
+                s.src = src; s.onload = res; s.onerror = rej;
+                document.head.appendChild(s);
+            });
+        }
+
+        async function handleResumeUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+            input.value = '';
+            showUploadToast('⏳ Reading file...');
+            let text = '';
+            try {
+                if (file.name.endsWith('.pdf')) {
+                    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+                    if (typeof pdfjsLib !== 'undefined') {
+                        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                        const buf = await file.arrayBuffer();
+                        const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+                        for (let p = 1; p <= pdf.numPages; p++) {
+                            const pg = await pdf.getPage(p);
+                            const ct = await pg.getTextContent();
+                            text += ct.items.map(i => i.str).join(' ') + '\n';
+                        }
+                    }
+                } else if (file.name.endsWith('.docx')) {
+                    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js');
+                    if (typeof mammoth !== 'undefined') {
+                        const buf = await file.arrayBuffer();
+                        const r = await mammoth.extractRawText({ arrayBuffer: buf });
+                        text = r.value;
+                    }
+                } else {
+                    text = await file.text();
+                }
+            } catch(e) {
+                showUploadToast('❌ Could not read file: ' + e.message, true);
+                return;
+            }
+            if (!text.trim()) { showUploadToast('❌ No text found in file.', true); return; }
+            showUploadToast('🔍 Extracting details...');
+            _parsedFields = parseResume(text);
+            showUploadPanel(_parsedFields);
+        }
+
+        function parseResume(text) {
+            const lines = text.split(/[\n\r]+/).map(l => l.trim()).filter(l => l.length > 1);
+            const fields = {};
+            // Name — first short Title-Case line
+            for (let i = 0; i < Math.min(8, lines.length); i++) {
+                const l = lines[i];
+                if (/^[A-Z][a-z]+([ ][A-Z][a-zA-Z.]+){1,3}$/.test(l) && l.length < 52) {
+                    fields.name = l; break;
+                }
+            }
+            // Email
+            const emailM = text.match(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/);
+            if (emailM) fields.email = emailM[0];
+            // Phone
+            const phoneM = text.match(/(\+?[\d][\d\s\-().]{8,14}[\d])/);
+            if (phoneM) fields.phone = phoneM[0].trim();
+            // LinkedIn
+            const liM = text.match(/linkedin\.com\/in\/[a-zA-Z0-9\-_%]+/i);
+            if (liM) fields.linkedin = 'https://' + liM[0];
+            // Location
+            const locM = text.match(/([A-Z][a-zA-Z]+(?:[\s][A-Z][a-zA-Z]+)*),\s*([A-Z]{2}|[A-Z][a-zA-Z]+)/);
+            if (locM) fields.location = locM[0];
+            // Summary — paragraph after name/contact block
+            const sumM = text.match(/(?:summary|objective|profile|about)[:\s\-]+([\s\S]{60,500}?)(?:\n{2,}|(?:\n[A-Z][A-Z\s]{3,}\n))/i);
+            if (sumM) fields.summary = sumM[1].replace(/\s+/g,' ').trim();
+            // Skills
+            const skillM = text.match(/(?:skills?|technologies|tools|competencies)[:\s\-]+([\s\S]{10,600}?)(?:\n{2,}|(?:\n[A-Z][A-Z\s]{3,}\n))/i);
+            if (skillM) {
+                fields.skills = skillM[1].split(/[,•|·\n\/\\]+/)
+                    .map(s => s.replace(/[^a-zA-Z0-9\s.+#-]/g,' ').trim())
+                    .filter(s => s.length > 1 && s.length < 40)
+                    .slice(0, 12);
+            }
+            
+            // Experience
+            const expM = text.match(/(?:experience|employment|work history)[:\s\-]+([\s\S]{50,2500}?)(?:\n[A-Z][A-Z\s]{3,}\n|$)/i);
+            if (expM) fields.experience = expM[1].trim();
+
+            // Education
+            const eduM = text.match(/(?:education|academic background)[:\s\-]+([\s\S]{20,800}?)(?:\n[A-Z][A-Z\s]{3,}\n|$)/i);
+            if (eduM) fields.education = eduM[1].trim();
+
+            // Projects
+            const projM = text.match(/(?:projects|personal projects)[:\s\-]+([\s\S]{30,1500}?)(?:\n[A-Z][A-Z\s]{3,}\n|$)/i);
+            if (projM) fields.projects = projM[1].trim();
+
+            // Tagline
+            if (fields.name) {
+                const degM = text.match(/(B\.?(?:Com|Tech|Sc|E|A|BA|BBA)|M\.?(?:Com|Tech|Sc|BA|MBA)|B\.?C\.?A|M\.?C\.?A)/i);
+                if (degM) fields.tagline = degM[0] + ' Graduate';
+            }
+            return fields;
+        }
+
+        function showUploadPanel(fields) {
+            const container = document.getElementById('uploadFields');
+            container.innerHTML = '';
+            const fieldDefs = [
+                { key: 'name',     label: 'Full Name',    apply: v => setEl('.name', v) },
+                { key: 'email',    label: 'Email',        apply: v => setEl('.contact-item span', v, 1) },
+                { key: 'phone',    label: 'Phone',        apply: v => setEl('.contact-item span', v, 0) },
+                { key: 'linkedin', label: 'LinkedIn',     apply: v => setEl('.contact-item span', v, 2) },
+                { key: 'location', label: 'Location',     apply: v => setEl('.contact-item span', v + ' · Open to Relocate', 3) },
+                { key: 'tagline',  label: 'Tagline',      apply: v => setEl('.tagline', v + ' · Open to Opportunities') },
+                { key: 'summary',  label: 'Summary',      apply: v => setEl('.objective-text', v) },
+                { key: 'experience', label: 'Experience', apply: v => _applyFns.experience(v) },
+                { key: 'education',  label: 'Education',  apply: v => _applyFns.education(v) },
+                { key: 'projects',   label: 'Projects',   apply: v => _applyFns.projects(v) },
+            ];
+            let count = 0;
+            fieldDefs.forEach(def => {
+                if (!fields[def.key]) return;
+                count++;
+                const row = document.createElement('div');
+                row.className = 'upload-field-row';
+                row.dataset.key = def.key;
+                const val = Array.isArray(fields[def.key]) ? fields[def.key].join(', ') : fields[def.key];
+                const displayVal = val.length > 120 ? val.substring(0, 120) + '...' : val;
+                row.innerHTML = `
+                    <span class="uf-label">${def.label}</span>
+                    <span class="uf-value">${displayVal}</span>
+                    <button class="uf-apply" onclick="applySingleField('${def.key}')">Apply</button>`;
+                container.appendChild(row);
+            });
+            if (fields.skills && fields.skills.length) {
+                count++;
+                const row = document.createElement('div');
+                row.className = 'upload-field-row';
+                row.dataset.key = 'skills';
+                row.innerHTML = `
+                    <span class="uf-label">Skills</span>
+                    <span class="uf-value">${fields.skills.join(' · ')}</span>
+                    <button class="uf-apply" onclick="applySingleField('skills')">Apply</button>`;
+                container.appendChild(row);
+            }
+            if (!count) {
+                container.innerHTML = '<p style="color:#64748b;font-size:0.85rem;padding:8px 0">⚠️ Could not extract structured fields. Try a cleaner PDF or paste text manually.</p>';
+            }
+            document.getElementById('uploadPanel').style.display = 'flex';
+        }
+
+        function setEl(selector, value, idx = 0) {
+            const el = document.querySelectorAll(selector)[idx];
+            if (el) el.innerHTML = value;
+            return !!el;
+        }
+
+        function parseBlocks(textStr) {
+            if (!textStr) return [];
+            const chunks = textStr.split(/\n\s*\n/);
+            return chunks.map(c => {
+                const lines = c.split('\n').map(l => l.trim()).filter(l => l);
+                let title = lines[0] || '';
+                let subtitle = lines[1] || '';
+                let date = '[Dates]';
+                let desc = [];
+                for(let i=0; i<lines.length; i++) {
+                    const l = lines[i];
+                    const dateM = l.match(/((?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s*\d{2,4}\s*[-–to]+\s*(?:[a-z]+\s*\d{2,4}|present|current)|\d{4}\s*[-–to]+\s*(?:\d{4}|present|current))/i);
+                    if (dateM && date === '[Dates]') {
+                        date = dateM[0];
+                        if (i === 0) title = title.replace(date, '').trim();
+                        if (i === 1) subtitle = subtitle.replace(date, '').trim();
+                    }
+                    if (l.startsWith('•') || l.startsWith('-') || i > 1) desc.push(l.replace(/^[•\-]\s*/, ''));
+                }
+                return { title: title || '[Missing Title]', subtitle, date, desc };
+            }).filter(c => c.title);
+        }
+
+        const _applyFns = {
+            name:     v => setEl('.name', v),
+            email:    v => setEl('.contact-item span', v, 1),
+            phone:    v => setEl('.contact-item span', v, 0),
+            linkedin: v => setEl('.contact-item span', v, 2),
+            location: v => setEl('.contact-item span', v + ' · Open to Relocate', 3),
+            tagline:  v => setEl('.tagline', v + ' · Open to Opportunities'),
+            summary:  v => setEl('.objective-text', v),
+            skills: skills => {
+                const techTags = document.querySelectorAll('.skill-tag.tech');
+                skills.slice(0, techTags.length).forEach((s, i) => { if (techTags[i]) techTags[i].textContent = s; });
+                setEl('.sig-name', _parsedFields.name || '');
+            },
+            experience: str => {
+                const blocks = parseBlocks(str);
+                const container = document.querySelector('#experience');
+                if (!container || !blocks.length) return;
+                const tpl = container.querySelector('.exp-block');
+                if (!tpl) return;
+                container.querySelectorAll('.exp-block').forEach(el => el.remove());
+                blocks.forEach((b, i) => {
+                    const clone = tpl.cloneNode(true);
+                    clone.dataset.fieldId = 'exp_block_' + Date.now() + i;
+                    const rEl = clone.querySelector('.exp-role'); if (rEl) { rEl.innerHTML = b.title; rEl.dataset.fieldId = 'exp_r_' + Date.now() + i; }
+                    const cEl = clone.querySelector('.exp-company'); if (cEl) { cEl.innerHTML = b.subtitle; cEl.dataset.fieldId = 'exp_c_' + Date.now() + i; }
+                    const dEl = clone.querySelector('.exp-date'); if (dEl) { dEl.innerHTML = b.date; dEl.dataset.fieldId = 'exp_d_' + Date.now() + i; }
+                    const ul = clone.querySelector('.exp-bullets');
+                    if (ul) {
+                        ul.innerHTML = '';
+                        b.desc.forEach((line, j) => {
+                            const li = document.createElement('li');
+                            li.innerHTML = line; li.setAttribute('contenteditable', 'true');
+                            li.dataset.fieldId = 'exp_b_' + Date.now() + i + '_' + j;
+                            ul.appendChild(li);
+                        });
+                        if (!b.desc.length) ul.innerHTML = `<li contenteditable="true" data-field-id="exp_b_${Date.now()}_e">[Add details here]</li>`;
+                    }
+                    container.appendChild(clone);
+                });
+                if (window.addDeleteBtn) container.querySelectorAll('.exp-block, .exp-bullets li').forEach(el => addDeleteBtn(el));
+            },
+            education: str => {
+                const blocks = parseBlocks(str);
+                const container = document.querySelector('#education');
+                if (!container || !blocks.length) return;
+                const list = container.querySelector('.education-list');
+                const tpl = list.querySelector('.edu-card');
+                if (!tpl) return;
+                list.querySelectorAll('.edu-card').forEach(el => el.remove());
+                blocks.forEach((b, i) => {
+                    const clone = tpl.cloneNode(true);
+                    clone.dataset.fieldId = 'edu_card_' + Date.now() + i;
+                    const yEl = clone.querySelector('.edu-year'); if (yEl) { yEl.innerHTML = b.date.substring(0,4) || '[YYYY]'; yEl.dataset.fieldId = 'edu_y_' + Date.now() + i; }
+                    const dEl = clone.querySelector('.edu-details h4'); if (dEl) { dEl.innerHTML = b.title; dEl.dataset.fieldId = 'edu_t_' + Date.now() + i; }
+                    const iEl = clone.querySelector('.edu-institution'); if (iEl) { iEl.innerHTML = b.subtitle || '[Institution]'; iEl.dataset.fieldId = 'edu_i_' + Date.now() + i; }
+                    list.appendChild(clone);
+                });
+                if (window.addDeleteBtn) list.querySelectorAll('.edu-card').forEach(el => addDeleteBtn(el));
+            },
+            projects: str => {
+                const blocks = parseBlocks(str);
+                const container = document.querySelector('#projects');
+                if (!container || !blocks.length) return;
+                const tpl = container.querySelector('.project-block');
+                if (!tpl) return;
+                container.querySelectorAll('.project-block').forEach(el => el.remove());
+                blocks.forEach((b, i) => {
+                    const clone = tpl.cloneNode(true);
+                    clone.dataset.fieldId = 'proj_block_' + Date.now() + i;
+                    const tEl = clone.querySelector('.project-title'); if (tEl) { tEl.innerHTML = b.title; tEl.dataset.fieldId = 'proj_t_' + Date.now() + i; }
+                    const techEl = clone.querySelector('.project-tech'); if (techEl) { techEl.innerHTML = b.subtitle || '[Tech Stack]'; techEl.dataset.fieldId = 'proj_tech_' + Date.now() + i; }
+                    const dEl = clone.querySelector('.project-desc'); if (dEl) { dEl.innerHTML = b.desc.join(' '); dEl.dataset.fieldId = 'proj_d_' + Date.now() + i; }
+                    container.appendChild(clone);
+                });
+                if (window.addDeleteBtn) container.querySelectorAll('.project-block').forEach(el => addDeleteBtn(el));
+            }
+        };
+
+        function applySingleField(key) {
+            const val = _parsedFields[key];
+            if (!val || !_applyFns[key]) return;
+            _applyFns[key](val);
+            // Also sync name to sig
+            if (key === 'name') setEl('.sig-name', val);
+            // Mark row applied
+            const row = document.querySelector(`.upload-field-row[data-key="${key}"]`);
+            if (row) { row.classList.add('applied'); row.querySelector('.uf-apply').textContent = '✓ Applied'; }
+            saveToLocal();
+        }
+
+        function applyAllFields() {
+            Object.keys(_parsedFields).forEach(key => applySingleField(key));
+            setTimeout(closeUploadPanel, 600);
+        }
+
+        function closeUploadPanel() {
+            document.getElementById('uploadPanel').style.display = 'none';
+        }
+
+        function showUploadToast(msg, persist = false) {
+            const st = document.getElementById('saveStatus');
+            st.textContent = msg;
+            if (!persist) setTimeout(() => { if (st.textContent === msg) st.textContent = ''; }, 2500);
+        }
     </script>
 </body>
 </html>
