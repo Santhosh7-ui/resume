@@ -665,20 +665,99 @@ a { color: inherit; text-decoration: none; }
     box-shadow: 0 12px 24px rgba(13,118,110,0.3);
 }
 
+/* ---- Key Strengths ---- */
+.strengths-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.strength-card {
+    display: flex;
+    gap: 10px;
+    padding: 14px;
+    background: #fff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--primary-100);
+    transition: all 0.3s ease;
+    position: relative;
+}
+.strength-card:hover { border-color: var(--teal-500); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+.strength-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+
+.strength-content h4 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--primary-900);
+    margin-bottom: 3px;
+}
+.strength-content p {
+    font-size: 0.75rem;
+    color: var(--primary-600);
+    line-height: 1.5;
+}
+
+/* ---- Interests / Hobbies ---- */
+.hobbies-list { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.hobby-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 14px;
+    background: #fff;
+    border: 1px solid var(--primary-200);
+    border-radius: var(--radius-full);
+    font-size: 0.78rem;
+    color: var(--primary-700);
+    transition: all 0.2s;
+    position: relative;
+}
+.hobby-tag:hover { border-color: var(--teal-500); background: var(--teal-100); }
+
+/* ---- Drag Handle ---- */
+.drag-handle {
+    position: absolute;
+    top: 50%;
+    left: -22px;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-400);
+    cursor: grab;
+    opacity: 0;
+    transition: opacity 0.2s, color 0.2s;
+    border-radius: 4px;
+    z-index: 10;
+}
+.drag-handle:active { cursor: grabbing; }
+.drag-handle:hover { color: var(--teal-600); background: rgba(20,184,166,0.1); }
+.section:hover > .drag-handle { opacity: 1; }
+
+/* SortableJS feedback */
+.sortable-ghost {
+    opacity: 0.25;
+    background: rgba(20,184,166,0.08) !important;
+    border: 2px dashed var(--teal-500) !important;
+    border-radius: var(--radius-md);
+}
+.sortable-chosen { box-shadow: 0 10px 30px rgba(15,23,42,0.18) !important; }
+.sortable-drag { opacity: 1 !important; }
+
 /* ---- PRINT MEDIA ---- */
 @media print {
     body { background: #fff; padding: 0; }
     .print-controls, .back-btn { display: none !important; }
-    .resume-container {
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
-        max-width: 100%;
-    }
-    .corner-accent { display: none; }
+    .resume-container { border-radius: 0; box-shadow: none; border: none; max-width: 100%; }
+    .corner-accent, .drag-handle { display: none !important; }
     .section { opacity: 1 !important; transform: none !important; }
     .edu-card, .exp-block, .cert-card, .project-block { opacity: 1 !important; transform: none !important; }
     .lang-fill { transform: scaleX(1) !important; }
     .availability-banner { display: flex !important; }
     @page { margin: 0.4in 0.5in; }
 }
+

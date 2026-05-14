@@ -220,6 +220,47 @@
                     </p>
                 </section>
 
+                <!-- KEY STRENGTHS -->
+                <section class="section" id="strengths">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <h2>Key Strengths</h2>
+                    </div>
+                    <div class="strengths-grid">
+                        <!-- Duplicate or delete strength cards as needed -->
+                        <div class="strength-card">
+                            <div class="strength-icon" contenteditable="true">💡</div>
+                            <div class="strength-content">
+                                <h4 contenteditable="true">[Strength Title 1]</h4>
+                                <p contenteditable="true">[Brief description of this key strength and how it adds value]</p>
+                            </div>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon" contenteditable="true">🎯</div>
+                            <div class="strength-content">
+                                <h4 contenteditable="true">[Strength Title 2]</h4>
+                                <p contenteditable="true">[Brief description of this key strength and how it adds value]</p>
+                            </div>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon" contenteditable="true">🔍</div>
+                            <div class="strength-content">
+                                <h4 contenteditable="true">[Strength Title 3]</h4>
+                                <p contenteditable="true">[Brief description of this key strength and how it adds value]</p>
+                            </div>
+                        </div>
+                        <div class="strength-card">
+                            <div class="strength-icon" contenteditable="true">🤝</div>
+                            <div class="strength-content">
+                                <h4 contenteditable="true">[Strength Title 4]</h4>
+                                <p contenteditable="true">[Brief description of this key strength and how it adds value]</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- WORK EXPERIENCE — Delete this section if fresher with no experience -->
                 <section class="section" id="experience">
                     <div class="section-header">
@@ -528,6 +569,24 @@
                     </div>
                 </section>
 
+                <!-- INTERESTS / HOBBIES -->
+                <section class="section" id="interests">
+                    <div class="section-header">
+                        <div class="section-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </div>
+                        <h2>Interests</h2>
+                    </div>
+                    <!-- EDIT: Click each tag to edit. Hover to delete. -->
+                    <div class="hobbies-list">
+                        <span class="hobby-tag" contenteditable="true">📖 [Interest 1]</span>
+                        <span class="hobby-tag" contenteditable="true">🎨 [Interest 2]</span>
+                        <span class="hobby-tag" contenteditable="true">🎮 [Interest 3]</span>
+                        <span class="hobby-tag" contenteditable="true">🎵 [Interest 4]</span>
+                        <span class="hobby-tag" contenteditable="true">✈️ [Interest 5]</span>
+                    </div>
+                </section>
+
             </div><!-- /right-column -->
 
         </main>
@@ -693,6 +752,36 @@
                 addDeleteBtn(el, lbl);
             });
         });
+
+        // ---- DRAG & DROP (SortableJS) ----
+        const sortableScript = document.createElement('script');
+        sortableScript.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js';
+        sortableScript.onload = function() {
+            // Make sections in each column draggable
+            ['.left-column', '.right-column'].forEach(colSel => {
+                const col = document.querySelector(colSel);
+                if (!col) return;
+                new Sortable(col, {
+                    handle: '.drag-handle',
+                    animation: 200,
+                    ghostClass: 'sortable-ghost',
+                    chosenClass: 'sortable-chosen',
+                    dragClass: 'sortable-drag',
+                    onEnd: saveToLocal
+                });
+            });
+
+            // Add drag handle grip icon to every section
+            document.querySelectorAll('.section').forEach(section => {
+                if (section.querySelector('.drag-handle')) return;
+                const handle = document.createElement('div');
+                handle.className = 'drag-handle';
+                handle.title = 'Drag to reorder';
+                handle.innerHTML = '<svg width="12" height="18" viewBox="0 0 8 18" fill="currentColor"><circle cx="2" cy="2" r="1.5"/><circle cx="6" cy="2" r="1.5"/><circle cx="2" cy="7" r="1.5"/><circle cx="6" cy="7" r="1.5"/><circle cx="2" cy="12" r="1.5"/><circle cx="6" cy="12" r="1.5"/><circle cx="2" cy="17" r="1.5"/><circle cx="6" cy="17" r="1.5"/></svg>';
+                section.insertBefore(handle, section.firstChild);
+            });
+        };
+        document.head.appendChild(sortableScript);
 
         // ---- Scroll animations ----
         const observer = new IntersectionObserver((entries) => {
